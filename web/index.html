@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PERXIA · Órdenes de compra SAP</title>
+  <meta name="description" content="AI Worker de PERXIA para preparación y control de órdenes de compra SAP.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="module" src="/app.js"></script>
+</head>
+<body>
+  <div id="app" class="workspace">
+    <aside class="rail">
+      <div class="rail-top">
+        <a class="brand-lockup brand-link" href="/" aria-label="PERXIA"><span class="brand-name">PERXIA</span><span class="brand-dots" aria-hidden="true">•••</span></a>
+        <p class="rail-product">AI WORKER<br><strong>Órdenes de compra</strong></p>
+      </div>
+      <div class="rail-status"><span></span><div><small>ESTADO DEL WORKER</small><strong>Operativo</strong></div></div>
+      <nav class="rail-nav" aria-label="Navegación del workspace">
+        <button id="nuevaSesion" type="button" class="nueva-sesion"><span aria-hidden="true">+</span>Nueva solicitud</button>
+        <button id="abrirConversaciones" type="button" class="rail-action" aria-haspopup="dialog" aria-expanded="false" aria-controls="conversaciones"><span aria-hidden="true">◷</span>Conversaciones</button>
+      </nav>
+      <div class="rail-bottom"><span class="chip-worker">SAP SIMULADO</span></div>
+    </aside>
+
+    <section class="app-shell">
+      <header class="barra">
+        <div><p class="eyebrow"><span></span>WORKSPACE DE COMPRAS</p><h1>Preparación de órdenes de compra</h1></div>
+        <div class="modelo-wrap"><span class="modelo-label">MODELO ACTIVO</span><span id="modelo" class="modelo">Conectando…</span></div>
+      </header>
+
+      <section id="historial" class="historial" role="log" aria-live="polite" aria-label="Conversación">
+        <div class="bienvenida">
+          <div class="bienvenida-cabecera"><div class="welcome-mark" aria-hidden="true">⌁</div><div><p class="eyebrow"><span></span>LISTO PARA OPERAR</p><h2>De la solicitud a una OC trazable.</h2></div></div>
+          <p>Leo el paquete, aplico los controles RC1–RC10, preparo la evidencia y creo la orden en SAP simulado. Las excepciones requieren confirmación humana; los casos limpios continúan automáticamente.</p>
+          <div class="proceso" aria-label="Etapas del proceso"><span>01 · Leer</span><i></i><span>02 · Validar</span><i></i><span>03 · Preparar</span><i></i><span>04 · Crear</span></div>
+          <p class="casos-titulo">CASOS DE PRUEBA</p><div class="chips" id="chips"></div>
+        </div>
+      </section>
+
+      <div id="banner" class="banner" role="alert" hidden>
+        <div class="banner-signal">!</div>
+        <div class="banner-contenido"><p class="eyebrow"><span></span>DECISIÓN HUMANA REQUERIDA</p><strong>Confirma la excepción de <span id="casoPendiente"></span></strong><p>Revisa el payload, los controles y las excepciones antes de crear la orden.</p><pre id="payload" class="vista-payload" hidden></pre></div>
+        <div class="acciones-banner"><button type="button" class="primario" data-texto="Confirmo">Confirmar OC <span aria-hidden="true">→</span></button><button type="button" class="secundario" data-texto="Cancelar">Cancelar</button></div>
+      </div>
+
+      <div id="lectura" class="lectura" role="status" hidden><span>Estás viendo una conversación anterior.</span><div class="acciones-banner"><button id="continuarConversacion" type="button" class="primario">Continuar</button><button id="salirLectura" type="button" class="secundario">Nueva conversación</button></div></div>
+
+      <form id="formChat" class="entrada"><label for="mensaje" class="solo-lector">Mensaje</label><textarea id="mensaje" rows="2" placeholder='Ejemplo: Procesa la solicitud "sol-004"' required></textarea><button id="enviar" type="submit" class="primario" aria-label="Enviar mensaje">Enviar <span aria-hidden="true">↑</span></button><p class="entrada-ayuda">Enter para enviar · Shift + Enter para nueva línea</p></form>
+    </section>
+  </div>
+
+  <dialog id="conversaciones" class="cajon" aria-labelledby="tituloConversaciones">
+    <div class="cajon-cabecera"><div><p class="eyebrow"><span></span>MEMORIA LOCAL</p><h2 id="tituloConversaciones">Conversaciones</h2></div><button id="cerrarConversaciones" type="button" class="icono" aria-label="Cerrar">×</button></div>
+    <p id="avisoConversacion" class="error" role="alert" hidden></p><p id="sinConversaciones" class="sutil">Aún no hay conversaciones guardadas.</p><ul id="listaConversaciones" class="lista-conversaciones"></ul><p class="sutil">El contenido está disponible mientras el servidor conserve la sesión.</p><button id="borrarHistorial" type="button" class="secundario peligro">Borrar historial</button>
+  </dialog>
+</body>
+</html>

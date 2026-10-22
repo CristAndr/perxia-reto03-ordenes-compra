@@ -1,0 +1,3 @@
+# Conocimiento del proceso OC
+
+La solicitud, cotización y aprobación deben cotejarse con proveedores, centros de costo, indicadores IVA y condiciones de pago. RC1–RC4 y RC10 bloquean; RC5, RC6, RC8 y RC9 requieren confirmación ante excepción; RC7 deriva las condiciones de pago cuando faltan. Las claves inválidas de los catálogos se bloquean. La factura anterior a la solicitud se marca retroactiva incluso si existe cotización. La analista humana autoriza las excepciones antes de crear; el modelo no concede permisos. Cada intento de creación queda en control.csv. La evidencia es el correo de aprobación, con SHA256 del texto fuente y una representación TXT y PDF. Los fixtures son ficticios y no se envían a SAP real.
